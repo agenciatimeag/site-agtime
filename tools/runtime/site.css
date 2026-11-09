@@ -1,0 +1,12 @@
+/* Agência Time — estilos do runtime */
+html{scroll-behavior:smooth}
+#__framer-badge-container{display:none!important}
+/* lightbox */
+.lb{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:40px;background:rgba(0,0,0,.92);opacity:0;transition:opacity .3s ease;cursor:zoom-out}
+.lb.on{opacity:1}
+.lb img{max-width:min(1400px,100%);max-height:100%;object-fit:contain;border-radius:12px;transform:scale(.96);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.lb.on img{transform:none}
+.lb button{position:absolute;top:16px;right:20px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:28px;line-height:1;cursor:pointer}
+[data-lightbox]{cursor:zoom-in}
+[data-toggle-open]{cursor:pointer}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
