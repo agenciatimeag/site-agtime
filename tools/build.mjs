@@ -7,8 +7,9 @@ import { rewriteAssetUrls, stripFramerRuntime } from "./lib/html.mjs"
 import { patchCommon, patchPage } from "./patches.mjs"
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
-const OUT = path.join(ROOT, "site")
+const OUT = path.join(ROOT, "public")
 const FX = JSON.parse(fs.readFileSync(path.join(ROOT, "capture/effects.json"), "utf8"))
+const COMPONENTS = JSON.parse(fs.readFileSync(path.join(ROOT, "capture/components.json"), "utf8"))
 const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8")
 const exists = (p) => fs.existsSync(path.join(ROOT, p))
 
@@ -33,8 +34,11 @@ function fxFor($) {
 		}).filter((o) => Object.keys(o).some((k) => k !== "comp"))
 		if (keep.length) el[c] = keep
 	}
+	const cursorIds = new Set($("[data-framer-cursor]").map((_, n) => $(n).attr("data-framer-cursor")).get())
+	const cursors = {}
+	for (const id of cursorIds) if (COMPONENTS.cursors[id]) cursors[id] = COMPONENTS.cursors[id]
 	const comps = FX.components.filter((c) => c.enabledGestures && c.scopes.some((s) => present.has(s))).map((c) => ({ scopes: c.scopes, variantClassNames: c.variantClassNames, enabledGestures: c.enabledGestures, defaultVariant: c.defaultVariant }))
-	return { el, comps }
+	return { el, comps, cursors }
 }
 
 export function buildPage(id, mutate) {
@@ -68,7 +72,7 @@ function write(rel, html) {
 
 if (process.argv[1] && process.argv[1].endsWith("build.mjs")) {
 	fs.mkdirSync(path.join(OUT, "_site"), { recursive: true })
-	fs.copyFileSync(path.join(ROOT, "tools/runtime/site.js"), path.join(OUT, "_site/site.js"))
+	fs.writeFileSync(path.join(OUT, "_site/site.js"), read("tools/runtime/site.js").replace('/*RAYS_FRAG*/ ""', JSON.stringify(read("tools/runtime/lightrays.frag"))))
 	fs.writeFileSync(path.join(OUT, "_site/site.css"), read("tools/runtime/site.css") + "\n" + read("tools/snippets/portal.css") + (exists("tools/runtime/extra.css") ? "\n" + read("tools/runtime/extra.css") : ""))
 	const allMissing = new Set()
 	for (const p of PAGES) {

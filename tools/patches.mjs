@@ -107,14 +107,54 @@ function revealTextMarks($) {
 	})
 }
 
+const COMPONENTS = JSON.parse(fs.readFileSync(path.join(ROOT, "capture/components.json"), "utf8"))
+const FAQ = JSON.parse(fs.readFileSync(path.join(ROOT, "data/faq.json"), "utf8"))
+const containerClass = ($el) => ($el.attr("class") || "").split(/\s+/).find((c) => /^framer-[a-z0-9]+-container$/.test(c))
+
 function tickerMarks($) {
-	// Ticker do Framer: <section …><ul …><li>…</li></ul></section>
+	// Ticker do Framer: <div class="framer-xxx-container"><section …><ul …><li>…</li></ul></section></div>
 	$("section > ul").each((_, ul) => {
 		const $ul = $(ul), st = $ul.attr("style") || ""
 		if (!/display:\s*flex/.test(st)) return
-		const sp = ($ul.closest("[data-ticker-speed]").attr("data-ticker-speed")) || 40
-		$ul.attr("data-ticker", sp)
-		if (/flex-direction:\s*column/.test(st)) $ul.attr("data-ticker-dir", "y")
+		const props = COMPONENTS.tickers[containerClass($ul.parent().parent())] || {}
+		$ul.attr("data-ticker", props.speed == null ? 100 : props.speed)
+		$ul.attr("data-ticker-dir", props.direction === true ? "left" : props.direction || (/flex-direction:\s*column/.test(st) ? "top" : "left"))
+		if (props.hoverFactor != null && props.hoverFactor !== 1) $ul.attr("data-ticker-hover", props.hoverFactor)
+	})
+}
+
+function raysMarks($) {
+	for (const [cls, props] of Object.entries(COMPONENTS.lightRays)) {
+		$("." + cls).each((_, c) => {
+			const host = $(c).children().first()
+			if (!host.length) return
+			host.empty() // remove o <canvas> do three.js copiado da captura
+			const { animation, intensity, position, rays, reach, raysColor } = props
+			host.attr("data-rays", JSON.stringify({ animation, intensity, position, rays, reach, raysColor }))
+		})
+	}
+}
+
+// FAQ (componente framer-g8i14): insere a resposta e liga o abre/fecha
+function faqMarks($) {
+	const norm = (t) => t.replace(/\s+/g, " ").trim()
+	const answers = Object.fromEntries(Object.entries(FAQ).map(([q, a]) => [norm(q), a]))
+	$(".framer-g8i14.framer-v-1v29omc").each((_, root) => {
+		const $r = $(root)
+		const q = norm($r.find(".framer-1al39dj").text())
+		const a = answers[q]
+		if (!a) return
+		const paras = a.split("\n").map((t) => t.replace(/(www\.lemify\.com\.br)/, '<a href="https://www.lemify.com.br" target="_blank" rel="noopener" style="color:inherit">$1</a>'))
+		$r.append(`<div class="framer-1krqqod" data-framer-name="Answer" data-when-open style="--extracted-r6o4lv:var(--token-d2ee1de5-88f8-41d7-8642-338767096a94, rgba(255, 255, 255, 0.6));--framer-paragraph-spacing:0px;transform:none">${paras.map((t) => `<p class="framer-text framer-styles-preset-x0s9r5" style="--framer-text-color:var(--extracted-r6o4lv, var(--token-d2ee1de5-88f8-41d7-8642-338767096a94, rgba(255, 255, 255, 0.6)))">${t}</p>`).join("")}</div>`)
+		$r.attr("data-vt", JSON.stringify({ scope: "framer-g8i14", from: "framer-v-1v29omc", to: "framer-v-1u3l64d", id: "XkjwhHCcs" }))
+	})
+}
+
+// Menu do celular/tablet (componente framer-LDtDO): Mobile Closed <-> Mobile Open
+function menuMarks($) {
+	$(".framer-LDtDO.framer-v-1x71hfi").each((_, root) => {
+		$(root).attr("data-vt", JSON.stringify({ scope: "framer-LDtDO", from: "framer-v-1x71hfi", to: "framer-v-csul5u", id: "A2qOxz8VD", trigger: ".framer-12regrz", closeOnLink: true, transition: { type: "spring", duration: 0.4, bounce: 0 } }))
+		$(root).find(".framer-12regrz").attr("aria-label", "Abrir menu")
 	})
 }
 
@@ -125,6 +165,9 @@ export function patchCommon(ctx) {
 	fixLinks($)
 	revealTextMarks($)
 	tickerMarks($)
+	raysMarks($)
+	faqMarks($)
+	menuMarks($)
 	$("html").attr("lang", "pt-BR")
 }
 
@@ -137,4 +180,4 @@ export function patchPage(ctx) {
 
 const PAGE_PATCHES = {}
 export function registerPage(id, fn) { PAGE_PATCHES[id] = fn }
-export const consts = { WHATS, MAPS, ROOT }
+export const consts = { WHATS, MAPS, ROOT, COMPONENTS }
