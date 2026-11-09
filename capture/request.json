@@ -5,7 +5,6 @@
   "/sobre",
   "/portfolio",
   "/contato",
-  "/blog",
   "/404",
   "/portfolio/million-one",
   "/portfolio/porfólio-1",
@@ -18,138 +17,189 @@
  ],
  "hydrateWidths": [
   1440,
+  810,
   390
  ],
- "extraAssets": [
-  "https://framerusercontent.com/images/fwfmTxI85G1v3LMmEI5yhPmJiIA.jpg",
-  "https://framerusercontent.com/images/85qbXilGmCLHxV8XUmZRtSPKmQo.jpeg",
-  "https://framerusercontent.com/images/D2trK6TwZe9nUhFXbfj3n6yUkg.jpg",
-  "https://framerusercontent.com/images/hgm8dnsEnVWdsHy45WEyHDj9k5A.jpg",
-  "https://framerusercontent.com/images/2B9epNjEFC04KKipYcXB2h14kY.jpg",
-  "https://framerusercontent.com/images/BZlJuvebcsZzBzLKqmKBPUw8fT4.png",
-  "https://framerusercontent.com/images/ITy6z6DXdwdwPtQeV4o0Djdl0.jpeg",
-  "https://framerusercontent.com/images/PAOs7hYqv7budcaYzyHDF4kPTw.png",
-  "https://framerusercontent.com/images/VRqhpjdkHBzoiJ0g7wEGQo6jE58.jpg",
-  "https://framerusercontent.com/images/HJhgKA70Ol2alObTQgIhZZeQJk.png",
-  "https://framerusercontent.com/images/NYmEtUx5ww4gKQefOj86H92w8lw.jpeg",
-  "https://framerusercontent.com/images/oT9aaAcOUFAYZBOwgSziQN4Q6M.png",
-  "https://framerusercontent.com/images/y6nsXyFCXVHybL6AG2drPt8Xug.png",
-  "https://framerusercontent.com/images/c7Joo9eC5qmrHFzPkP1nJ0dgWg.png",
-  "https://framerusercontent.com/images/SmKpJArNfpH0J4YgHNcqsyxuyEA.jpg",
-  "https://framerusercontent.com/images/0wHjUWkfWuYogfvAEIjiIJV8tFw.jpeg",
-  "https://framerusercontent.com/images/tD84WiYcwh6f25dCt5UtJrLkTo.jpg",
-  "https://framerusercontent.com/images/7Bg7749u9LPwxS9RVu22SQzXLw.jpeg",
-  "https://framerusercontent.com/images/437WCNUlG8nxkF48y9BR4RE.jpg",
-  "https://framerusercontent.com/images/qKap5IoBxQ2GJCJ15MrJokCzE4.jpg",
-  "https://framerusercontent.com/images/1xOqMa4sAAwBCrdkiSJfIXups.png",
-  "https://framerusercontent.com/images/ZVxgbkwUDvSV2GXTDCCNa8GEUaY.jpg",
-  "https://framerusercontent.com/images/fksnpHLStk8PBWew2Gpj7IWk0nE.jpg",
-  "https://framerusercontent.com/images/CKlQCJTOqpT8sY07mVAnStWwJ0.jpg",
-  "https://framerusercontent.com/images/zMBDJ3iaj7fKXrbobixmRNCps.jpg",
-  "https://framerusercontent.com/images/6TnUhVyVQyStZl5qD521Z2LhWE.png",
-  "https://framerusercontent.com/images/rfyfcmfoze8CPRpWcfNvBpzBCM.png",
-  "https://framerusercontent.com/images/jipspN1zr5Jw37nMEI0cdit3iU.png",
-  "https://framerusercontent.com/images/fCbWTwZ3LLlEjt3ocPcOOmmBsus.png",
-  "https://framerusercontent.com/images/h33bTK94GjgfacsggRpl9F5QXes.png",
-  "https://framerusercontent.com/images/cmQEswT5KlDnITTWpFJi1ycWpA.png",
-  "https://framerusercontent.com/images/nv6wvWEhx82tRYYO7GpPtdr8iq0.png",
-  "https://framerusercontent.com/images/PNNdbsVq51EHgItYnZFaXmijM2U.jpg",
-  "https://framerusercontent.com/images/6igmB60fniZZ2g62iKIWQ848llo.jpg",
-  "https://framerusercontent.com/images/wIkfS2B4PLN8e56l2tauOjIs4.jpg",
-  "https://framerusercontent.com/images/EnDwPLRTX3We8xhTEDKAWKPM.png",
-  "https://framerusercontent.com/images/eMdqbqVkbMYbHIshhsnZkU0YM.jpg",
-  "https://framerusercontent.com/images/fMZ050rQrQAkThBqSONumIQTsk.png",
-  "https://framerusercontent.com/images/34oPM4geYZvQEIMUFktluljvJTY.png",
-  "https://framerusercontent.com/images/oITRaXEkBVhukMYINXV2xi05PY.jpg",
-  "https://framerusercontent.com/images/BPEedBVqFey75HW49TPbSktrQ.jpg",
-  "https://framerusercontent.com/images/nIWCXDZYVF7vYxiEOoTQCy0Sdk.jpg",
-  "https://framerusercontent.com/images/bvayy8dANcD4eW8aJOgXk3nwM.jpg",
-  "https://framerusercontent.com/images/atrgwHdiG99g2WnAm9rT8Z6HVf8.png",
-  "https://framerusercontent.com/images/KlEkOuDnRyptXW00L5ITBpmMh8.png",
-  "https://framerusercontent.com/images/JIyYB7Q5j8rTDofbI9ZCbThY6E.png",
-  "https://framerusercontent.com/images/GjXhBbd9IMeIohIUSc9SGWKLgik.png",
-  "https://framerusercontent.com/images/Xz1K0FLtzQW0wpO6WC6RfyywVw.jpg",
-  "https://framerusercontent.com/images/X2R1CXzojIGiGnI3HGSuleaeGs.jpg",
-  "https://framerusercontent.com/images/ti4Jjq8M3Xt5xFVBJqFVaw6ePk.png",
-  "https://framerusercontent.com/images/5JuX8tHPy5O8uuso5KYck5w70.png",
-  "https://framerusercontent.com/images/M2pOok2KN9kwrEFO8oqwneGF4c.jpg",
-  "https://framerusercontent.com/images/Yek33sNadoYqOAzfSvTZqjFc.jpg",
-  "https://framerusercontent.com/images/JSpnYyRQNq8IphygxWkRq2oooN0.jpg",
-  "https://framerusercontent.com/images/L1Pi1610mBwPOnRb165yMCtXbBA.jpg",
-  "https://framerusercontent.com/images/MoLBU7cMlGinYpUAwHofp6wEybE.png",
-  "https://framerusercontent.com/images/jRMqyiXrfw2SekmorYSDOzjuCI.png",
-  "https://framerusercontent.com/images/EcdOxyMhFiYqnz0bS0fkdQeL4.jpg",
-  "https://framerusercontent.com/images/vF8nECgXwGhkQVKlr1ZtnJVzdc.png",
-  "https://framerusercontent.com/images/XcBoQKi0yU2PQbi1lmeTfJKcdY.png",
-  "https://framerusercontent.com/images/sschgEqdK4WQ8utSBT4SH4ZhvQ.png",
-  "https://framerusercontent.com/images/wTOVwsHRn9HzmTksvN6rByg5XU.jpg",
-  "https://framerusercontent.com/images/3uJOPBcC54dnEYHDvFTMsJx1rgs.jpg",
-  "https://framerusercontent.com/images/r4NMtja5LMOyCTvGKDyShGwCg8.jpg",
-  "https://framerusercontent.com/images/IftkWNzjPbhKmPgeHUv2R9164.jpg",
-  "https://framerusercontent.com/images/yr5jMg7ZGK9PN4qNMcqz7bDUHUg.png",
-  "https://framerusercontent.com/images/ZlyFOFqexpTQmT5xIL8Jmry73E.png",
-  "https://framerusercontent.com/images/1H35HXppJAIVnvibjY0eLDodNVM.png",
-  "https://framerusercontent.com/images/vF0n3xy5XR60svsQoRZsywEmA5Y.png",
-  "https://framerusercontent.com/images/a2Ae7kjzZEm8SWIFOAcgdaU3DyQ.jpg",
-  "https://framerusercontent.com/images/taeJU0kgJCtV150zpKt4fHl5hY.png",
-  "https://framerusercontent.com/images/y4PoEAxH40JZyXwxPcoi0Z8RqPk.png",
-  "https://framerusercontent.com/images/vwn10rFvhHcBPIYlo4muLiaACo.png",
-  "https://framerusercontent.com/images/jjGQmnCK9DnrLM4akTOerjVkp9A.png",
-  "https://framerusercontent.com/images/olOjtvL78KPH3QrKMQyHd6JTQ7Y.jpeg",
-  "https://framerusercontent.com/images/sUZnn6TGtwsYPeNR8KknQbD5bI.jpeg",
-  "https://framerusercontent.com/images/HQiQT243MN1itZOX771FxR6euwI.png",
-  "https://framerusercontent.com/images/4nxs3cQCu2fciNoTSCwd3e9ahw.png",
-  "https://framerusercontent.com/images/O8P5WC5W3LQe0e9PvLCNxMS2quk.png",
-  "https://framerusercontent.com/images/3l7cpJjfC1VLeRWLg54tkWCEA.png",
-  "https://framerusercontent.com/images/WjGhVX2grmjQAfMIyIUYq9In0.png",
-  "https://framerusercontent.com/images/30SgNEcdoaIQjP9SX778MdNs1o.png",
-  "https://framerusercontent.com/images/e6cZytMVqpkrRcCvtZ0EphCgW1o.png",
-  "https://framerusercontent.com/images/WN09riOr84XewmFS7rHFjYg9IM.jpeg",
-  "https://framerusercontent.com/images/eI9yKV9nd0AT4YF5dO7pyE64.png",
-  "https://framerusercontent.com/images/sYsF5Bl4M7g4beavWohrfIF6ZE.png",
-  "https://framerusercontent.com/assets/4krs3tVVvu0cabGgXuPHeD6Qo.svg",
-  "https://framerusercontent.com/images/4krs3tVVvu0cabGgXuPHeD6Qo.svg",
-  "https://framerusercontent.com/assets/nePuoavaWDpAc3GlHoG5Q79Arg.svg",
-  "https://framerusercontent.com/images/nePuoavaWDpAc3GlHoG5Q79Arg.svg",
-  "https://framerusercontent.com/assets/QNYFTcGjjZCtXukl6oHIzwlse2w.svg",
-  "https://framerusercontent.com/images/QNYFTcGjjZCtXukl6oHIzwlse2w.svg",
-  "https://framerusercontent.com/assets/0xaFWu0WktUahswAafJLiocSxc.svg",
-  "https://framerusercontent.com/images/0xaFWu0WktUahswAafJLiocSxc.svg",
-  "https://framerusercontent.com/assets/kHlcXnpTjBKkAKqWkjGiP4oBMJ4.svg",
-  "https://framerusercontent.com/images/kHlcXnpTjBKkAKqWkjGiP4oBMJ4.svg",
-  "https://framerusercontent.com/assets/XQ73mMPXZK1tjIvINmNIqQ1aMB4.svg",
-  "https://framerusercontent.com/images/XQ73mMPXZK1tjIvINmNIqQ1aMB4.svg",
-  "https://framerusercontent.com/assets/Vk6eYMrX7A0Le7K4mBqtZnSIxso.svg",
-  "https://framerusercontent.com/images/Vk6eYMrX7A0Le7K4mBqtZnSIxso.svg",
-  "https://framerusercontent.com/assets/6NkkVQcDWJSAuhcggjC7jf46HU.svg",
-  "https://framerusercontent.com/images/6NkkVQcDWJSAuhcggjC7jf46HU.svg",
-  "https://framerusercontent.com/assets/Rq6dk3tZvSFdOdWVUHCqR9bbinw.svg",
-  "https://framerusercontent.com/images/Rq6dk3tZvSFdOdWVUHCqR9bbinw.svg",
-  "https://framerusercontent.com/assets/tY4igrqHQkt9DtMR5Wlz8d3iAA.svg",
-  "https://framerusercontent.com/images/tY4igrqHQkt9DtMR5Wlz8d3iAA.svg",
-  "https://framerusercontent.com/assets/juNnTJb4XhIwb2Zm1MqO2UMjhM.svg",
-  "https://framerusercontent.com/images/juNnTJb4XhIwb2Zm1MqO2UMjhM.svg",
-  "https://framerusercontent.com/assets/UAjP2h0lT2nZg3OKnZgPEnLtc.svg",
-  "https://framerusercontent.com/images/UAjP2h0lT2nZg3OKnZgPEnLtc.svg",
-  "https://framerusercontent.com/assets/cQtObXMqoOENBJFNHvGo8HO2w.svg",
-  "https://framerusercontent.com/images/cQtObXMqoOENBJFNHvGo8HO2w.svg",
-  "https://framerusercontent.com/assets/i3lRpYZPF6l5tginmGCGm4k6Fo.svg",
-  "https://framerusercontent.com/images/i3lRpYZPF6l5tginmGCGm4k6Fo.svg",
-  "https://framerusercontent.com/assets/23ltFY53sGksUI79i6KDahMEjsU.svg",
-  "https://framerusercontent.com/images/23ltFY53sGksUI79i6KDahMEjsU.svg",
-  "https://framerusercontent.com/assets/L9HqxZhZ5iQe39qHdIj1EjwUgA8.svg",
-  "https://framerusercontent.com/images/L9HqxZhZ5iQe39qHdIj1EjwUgA8.svg",
-  "https://framerusercontent.com/assets/F9cveGfkmDYJPsUktCLECV43s4.svg",
-  "https://framerusercontent.com/images/F9cveGfkmDYJPsUktCLECV43s4.svg",
-  "https://framerusercontent.com/assets/KCr8sxIBnJCzZI7ThcrRzxZ8UVs.svg",
-  "https://framerusercontent.com/images/KCr8sxIBnJCzZI7ThcrRzxZ8UVs.svg",
-  "https://framerusercontent.com/assets/gqv3tuTwxsISYOQe0Zwi95OP714.svg",
-  "https://framerusercontent.com/images/gqv3tuTwxsISYOQe0Zwi95OP714.svg",
-  "https://framerusercontent.com/assets/xtU2n341VGGcU87PrpBxCo4PEFo.svg",
-  "https://framerusercontent.com/images/xtU2n341VGGcU87PrpBxCo4PEFo.svg",
-  "https://framerusercontent.com/assets/e1zEk4xxTPo4zzl3Y6DhP5avQA.svg",
-  "https://framerusercontent.com/images/e1zEk4xxTPo4zzl3Y6DhP5avQA.svg"
+ "extraAssets": [],
+ "interactions": [
+  {
+   "name": "faq-1440-0",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-1440-1",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 1
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 1,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-1440-2",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 2
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 2,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-1440-3",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 3
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 3,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-1440-4",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 4
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 4,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-1440-5",
+   "page": "/",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 5
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 5,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-390-0",
+   "page": "/",
+   "width": 390,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "faq-810-0",
+   "page": "/",
+   "width": 810,
+   "steps": [
+    {
+     "scroll": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0
+    },
+    {
+     "click": "section.framer-1enwc1v [data-framer-name=\"Question\"]",
+     "nth": 0,
+     "wait": 1400
+    }
+   ],
+   "capture": "section.framer-1enwc1v"
+  },
+  {
+   "name": "menu-390",
+   "page": "/",
+   "width": 390,
+   "steps": [
+    {
+     "click": "[data-framer-name=\"Mobile Menu Icon\"]",
+     "wait": 1400
+    }
+   ],
+   "capture": "header"
+  },
+  {
+   "name": "menu-810",
+   "page": "/",
+   "width": 810,
+   "steps": [
+    {
+     "click": "[data-framer-name=\"Mobile Menu Icon\"]",
+     "wait": 1400
+    }
+   ],
+   "capture": "header"
+  },
+  {
+   "name": "contato-faq-1440",
+   "page": "/contato",
+   "width": 1440,
+   "steps": [
+    {
+     "scroll": "[data-framer-name=\"Question\"]",
+     "nth": 0
+    },
+    {
+     "click": "[data-framer-name=\"Question\"]",
+     "nth": 0,
+     "wait": 1400
+    }
+   ],
+   "capture": "main"
+  }
  ],
- "interactions": [],
- "run": 1
+ "run": 2,
+ "allow404": true
 }

@@ -22,7 +22,7 @@ async function get(url, asText = true, tries = 3) {
 	for (let i = 0; i < tries; i++) {
 		try {
 			const r = await fetch(url, { headers: { "user-agent": UA } })
-			if (!r.ok) throw new Error(`HTTP ${r.status}`)
+			if (!r.ok && !(asText && r.status === 404 && req.allow404)) throw new Error(`HTTP ${r.status}`)
 			return asText ? await r.text() : Buffer.from(await r.arrayBuffer())
 		} catch (e) {
 			if (i === tries - 1) throw e
@@ -130,11 +130,15 @@ for (const it of req.interactions || []) {
 	try {
 		await page.goto(BASE + encodeURI(it.page), { waitUntil: "networkidle", timeout: 90000 })
 		for (const step of it.steps) {
-			if (step.click) await page.locator(step.click).first().click({ timeout: 8000 })
-			if (step.hover) await page.locator(step.hover).first().hover({ timeout: 8000 })
+			const pick = (sel) => { const l = page.locator(sel); return step.nth != null ? l.nth(step.nth) : l.first() }
+			if (step.scroll) { await pick(step.scroll).scrollIntoViewIfNeeded(); }
+			if (step.click) await pick(step.click).click({ timeout: 8000 })
+			if (step.hover) await pick(step.hover).hover({ timeout: 8000 })
 			await page.waitForTimeout(step.wait || 900)
 		}
 		const html = it.capture ? await page.locator(it.capture).first().evaluate((el) => el.outerHTML) : await page.evaluate(() => document.body.outerHTML)
+		const css = await page.evaluate(() => [...document.styleSheets].map((s) => { try { return [...s.cssRules].map((r) => r.cssText).join("\n") } catch { return "" } }).join("\n"))
+		await fs.writeFile(path.join(OUT, "hydrated", `interaction-${it.name}.css`), css)
 		await fs.writeFile(path.join(OUT, "hydrated", `interaction-${it.name}.html`), html)
 		await page.screenshot({ path: path.join(OUT, "shots", `interaction-${it.name}.jpg`), type: "jpeg", quality: 60 })
 		console.log("interaction", it.name)
