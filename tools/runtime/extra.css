@@ -19,6 +19,8 @@
 .tm-pcard-title{margin:0;font:500 17px/1.3em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3)}
 .tm-meta{margin:0;display:flex;gap:6px;font:400 14px/1.4em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-8f8054d9-8a09-4e7e-b957-8a76557c5e75,rgba(255,255,255,.6))}
 .tm-masonry{columns:3;column-gap:20px;width:100%}
+.js .tm-masonry[data-masonry]{columns:auto;display:flex;gap:20px;align-items:flex-start}
+.tm-col{flex:1 1 0;min-width:0;display:flex;flex-direction:column}
 .tm-art,.tm-video{margin:0 0 20px;break-inside:avoid;display:flex;flex-direction:column;gap:10px}
 .tm-art a{display:block;border-radius:20px;overflow:hidden;border:1px solid var(--token-082d630a-c036-4f77-8c8d-5d7b4650e064,rgba(255,255,255,.08))}
 .tm-art img{display:block;width:100%;height:auto;transition:transform .5s cubic-bezier(.22,1,.36,1)}
@@ -40,3 +42,5 @@ html:not(.js) .tm-gallery[data-reveal]{opacity:1;transform:none}
 @media (max-width:1199.98px){.tm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tm-masonry{columns:2}}
 @media (max-width:809.98px){.tm-grid,.tm-grid-2,.tm-gallery{grid-template-columns:1fr}.tm-masonry{columns:1}.tm-h3{font-size:28px;line-height:32px}.tm-pcard-img{height:220px}}
 @media (prefers-reduced-motion:reduce){.tm-pcard,.tm-art img{transition:none}.tm-gallery[data-reveal]{opacity:1;transform:none}}
+/* celular: subtítulo do topo tinha largura fixa de 500px e saía da tela (defeito do site original) */
+@media (max-width:809.98px){.framer-1yftqk8{width:min(500px,calc(100vw - 40px))!important}}

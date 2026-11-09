@@ -12,8 +12,8 @@ i = 0
 for y in range(0, h, chunk):
     w = a.width + b.width + 20
     im = Image.new("RGB", (w, chunk), (255, 0, 255))
-    im.paste(a.crop((0, y, a.width, min(a.height, y + chunk))), (0, 0))
-    im.paste(b.crop((0, y, b.width, min(b.height, y + chunk))), (a.width + 20, 0))
+    if y < a.height: im.paste(a.crop((0, y, a.width, min(a.height, y + chunk))), (0, 0))
+    if y < b.height: im.paste(b.crop((0, y, b.width, min(b.height, y + chunk))), (a.width + 20, 0))
     im = im.resize((int(w * scale), int(chunk * scale)))
     im.save(f"{out}/{i:02d}.jpg", quality=70)
     i += 1

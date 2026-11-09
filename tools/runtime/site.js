@@ -569,6 +569,31 @@
 		})
 	}
 
+	/* ---------- 11b. grade "masonry" (preenche linha a linha, na coluna mais curta) ---------- */
+	function masonry() {
+		$$("[data-masonry]").forEach(function (box) {
+			var items = Array.prototype.slice.call(box.children)
+			var cols = 0
+			var layout = function () {
+				var n = innerWidth < 810 ? 1 : innerWidth < 1200 ? 2 : 3
+				if (n === cols) return
+				cols = n
+				box.innerHTML = ""
+				var colEls = [], heights = []
+				for (var i = 0; i < n; i++) { var c = doc.createElement("div"); c.className = "tm-col"; box.appendChild(c); colEls.push(c); heights.push(0) }
+				items.forEach(function (it) {
+					var k = heights.indexOf(Math.min.apply(null, heights))
+					colEls[k].appendChild(it)
+					var img = it.querySelector("img")
+					var ratio = img && img.naturalWidth ? img.naturalHeight / img.naturalWidth : +(img && img.getAttribute("data-ratio")) || 1
+					heights[k] += ratio + 0.15
+				})
+			}
+			layout()
+			addEventListener("resize", layout)
+		})
+	}
+
 	/* ---------- 12. blocos próprios que aparecem ao rolar ---------- */
 	function reveals() {
 		$$("[data-reveal]").forEach(function (el) { inView(el, 0.3, function () { el.classList.add("is-in") }) })
@@ -577,7 +602,7 @@
 	function start() {
 		doc.documentElement.classList.add("js")
 		var safe = function (fn) { try { fn() } catch (e) { console.warn(e) } }
-		;[appearOnLoad, textEffects, transformOnView, loops, scrollDirection, hoverVariants, revealText, variantToggles, tickers, lightRays, cursor, lightbox, forms, reveals].forEach(safe)
+		;[appearOnLoad, textEffects, transformOnView, loops, scrollDirection, hoverVariants, revealText, variantToggles, tickers, lightRays, cursor, lightbox, forms, masonry, reveals].forEach(safe)
 	}
 	if (doc.readyState === "loading") doc.addEventListener("DOMContentLoaded", start)
 	else start()

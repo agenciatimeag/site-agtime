@@ -6,6 +6,22 @@ import { registerPage, setText, consts } from "./patches.mjs"
 
 const DATA = JSON.parse(fs.readFileSync(path.join(consts.ROOT, "data/portfolio.json"), "utf8"))
 export const PROJECTS = DATA.projects
+import { localAsset } from "./lib/html.mjs"
+// largura/altura da imagem (lê o cabeçalho do arquivo PNG/JPEG já capturado)
+function imgSize(url) {
+	const l = localAsset(url)
+	if (!l) return null
+	const b = fs.readFileSync(path.join(consts.ROOT, "public", l))
+	if (b[0] === 0x89) return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) }
+	let i = 2
+	while (i < b.length) {
+		if (b[i] !== 0xff) return null
+		const m = b[i + 1], len = b.readUInt16BE(i + 2)
+		if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) return { h: b.readUInt16BE(i + 5), w: b.readUInt16BE(i + 7) }
+		i += 2 + len
+	}
+	return null
+}
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;")
 const bare = (u) => u.split("?")[0]
 
@@ -67,10 +83,13 @@ const smallCard = (p) => `<a class="tm-pcard" href="/portfolio/${p.slug}" data-f
 	<div class="tm-pcard-img"><img src="${esc(bare(p.img1.url))}" alt="${esc(p.img1.alt)}" loading="lazy" decoding="async"></div>
 	<div class="tm-pcard-info"><p class="tm-pcard-title">${esc(p.title)}</p><p class="tm-meta">${esc(p.category)}<span>·</span>${esc(p.year)}</p></div>
 </a>`
-const artCard = (a) => `<figure class="tm-art">
-	<a href="${esc(bare(a.img))}" data-lightbox="${esc(bare(a.img))}" aria-label="Ampliar ${esc(a.title)}"><img src="${esc(bare(a.img))}" alt="${esc(a.title + " · " + a.client)}" loading="lazy" decoding="async"></a>
+const artCard = (a) => {
+	const d = imgSize(a.img)
+	return `<figure class="tm-art">
+	<a href="${esc(bare(a.img))}" data-lightbox="${esc(bare(a.img))}" aria-label="Ampliar ${esc(a.title)}"><img src="${esc(bare(a.img))}" alt="${esc(a.title + " · " + a.client)}"${d ? ` width="${d.w}" height="${d.h}" data-ratio="${(d.h / d.w).toFixed(3)}"` : ""} loading="lazy" decoding="async"></a>
 	<figcaption><b>${esc(a.title)}</b><span>·</span>${esc(a.client)}</figcaption>
 </figure>`
+}
 const videoCard = (v) => {
 	const id = (v.youtube.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/) || [])[1]
 	if (!id) return ""
@@ -97,7 +116,7 @@ export function portfolioPage(ctx) {
 	bottom.before(`<div class="tm-head"><h3 class="tm-h3">Projetos</h3><p class="tm-p">Cases completos, do planejamento à entrega.</p></div>`)
 	const more = PROJECTS.slice(6)
 	let extra = `<div class="tm-section tm-more"><h4 class="tm-h4">Mais projetos</h4><div class="tm-grid">${more.map(smallCard).join("")}</div></div>`
-	extra += `<div class="tm-section tm-anchor" id="artes"><div class="tm-head"><h3 class="tm-h3">Artes</h3><p class="tm-p">Posts, campanhas, identidades visuais e peças gráficas criadas para nossos clientes.</p></div><div class="tm-masonry">${DATA.arts.map(artCard).join("")}</div></div>`
+	extra += `<div class="tm-section tm-anchor" id="artes"><div class="tm-head"><h3 class="tm-h3">Artes</h3><p class="tm-p">Posts, campanhas, identidades visuais e peças gráficas criadas para nossos clientes.</p></div><div class="tm-masonry" data-masonry>${DATA.arts.map(artCard).join("")}</div></div>`
 	if (videos.length) extra += `<div class="tm-section tm-anchor" id="videos"><div class="tm-head"><h3 class="tm-h3">Vídeos</h3><p class="tm-p">Institucionais, campanhas, reels e conteúdos em vídeo produzidos pela Time.</p></div><div class="tm-grid tm-grid-2">${videos.map(videoCard).join("")}</div></div>`
 	bottom.after(extra)
 }
@@ -126,8 +145,17 @@ function detailPage(ctx, p) {
 	// outros trabalhos
 	$(".framer-1uw3jty h2").each((_, el) => setWords($, el, "Outros trabalhos"))
 	$(".framer-1j3edhd-container").each((_, el) => { setText($, $(el).find(".framer-16xb1fn p").first(), "Ver todos os trabalhos"); $(el).find("a").attr("href", "/portfolio") })
-	const cards = $(".framer-c954yj").children().toArray()
+	const cards = $(".framer-c954yj a").toArray()
 	cards.forEach((c, i) => { if (others[i]) fillSecondaryCard($, c, others[i]); else $(c).remove() })
+	// links do modelo que apontavam para a própria página
+	$('a[href^="/portfolio/million-one"]').each((_, a) => $(a).attr("href", $(a).attr("href").replace("/portfolio/million-one", `/portfolio/${p.slug}`)))
+	// FAQ do modelo de detalhe ainda estava em inglês
+	$("h2").each((_, el) => {
+		const t = $(el).text().replace(/\s+/g, " ").trim()
+		if (t === "Frequently") setWords($, el, "Perguntas")
+		else if (t === "Asked Questions") setWords($, el, "Frequentes")
+	})
+	$("p").filter((_, el) => /^Have questions\? Our FAQ section/.test($(el).text().trim())).each((_, el) => $(el).html("Tem dúvidas? Nossa seção de perguntas frequentes (FAQ) tem respostas rápidas para as dúvidas mais comuns."))
 	// metadados
 	$("title").text(`${p.innerTitle} | Agência Time`)
 	$('meta[property="og:title"], meta[name="twitter:title"]').attr("content", `${p.innerTitle} | Agência Time`)
