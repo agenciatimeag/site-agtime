@@ -61,7 +61,7 @@ export function fillWorkCard($, wrap, p) {
 function fillSecondaryCard($, wrap, p) {
 	const $w = $(wrap)
 	$w.find("a").addBack("a").first().attr("href", `/portfolio/${p.slug}`)
-	setText($, $w.find(".framer-1p919nn h4"), p.title)
+	$w.find(".framer-1p919nn h4").each((_, el) => setText($, el, p.title))
 	$w.find(".framer-1c58yda p").each((_, el) => setText($, el, p.year))
 	$w.find(".framer-pd56mf img").each((_, img) => setImg($, img, p.img1.url, p.img1.alt))
 	$w.find(".framer-19v8eng-container .framer-1pw8fxn p").each((_, el) => setText($, el, p.category))

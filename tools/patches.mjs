@@ -52,6 +52,8 @@ export function replaceTexts($, root, map = EXACT, subs = SUB) {
 
 export const setText = ($, el, text) => {
 	// troca só o texto, mantendo a estrutura <p><span>…</span></p>
+	const many = $(el).toArray()
+	if (many.length > 1) return many.forEach((e) => setText($, e, text))
 	const nodes = []
 	$(el).find("*").addBack().contents().each((_, n) => { if (n.type === "text" && n.data.trim()) nodes.push(n) })
 	if (!nodes.length) { $(el).text(text); return }
@@ -68,17 +70,20 @@ function fixResponsiveEnglish(ctx) {
 	$("[class*=framer-]").each((_, el) => {
 		const $el = $(el)
 		if (!$el.children("p, h1, h2, h3, h4, h5, h6").length) return
-		const txt = $el.text().trim()
+		const txt = $el.text().replace(/\s+/g, " ").trim()
 		if (!ENGLISH.test(txt) || /[ãçõáéíóúê]/i.test(txt)) return
 		if (ctx.visibleAt(el, 1440)) return
 		const cls = ($el.attr("class") || "").split(/\s+/).find((c) => /^framer-[a-z0-9]+$/.test(c))
 		if (!cls) return
-		const twin = $("." + cls).toArray().find((o) => o !== el && ctx.visibleAt(o, 1440) && !ENGLISH.test($(o).text()))
+		const twin = $("." + cls).toArray().find((o) => o !== el && ctx.visibleAt(o, 1440) && !ENGLISH.test($(o).text().replace(/\s+/g, " ")))
 		if (!twin) return
 		const src = [], dst = []
 		$(twin).find("*").contents().each((_, x) => { if (x.type === "text" && x.data.trim()) src.push(x) })
 		$el.find("*").contents().each((_, x) => { if (x.type === "text" && x.data.trim()) dst.push(x) })
+		const sk = $(twin).children().toArray(), dk = $el.children().toArray()
 		if (src.length === dst.length) dst.forEach((x, i) => (x.data = src[i].data))
+		// mesma quantidade de parágrafos: troca só o conteúdo, mantendo alinhamento/estilo do celular
+		else if (sk.length === dk.length) dk.forEach((d, i) => $(d).html($(sk[i]).html()))
 		else $el.html($(twin).html())
 		n++
 	})
@@ -190,10 +195,36 @@ function fixHead($, pagePath) {
 	})
 }
 
+const FAQ_TEXT = "Tem dúvidas? Nossa seção de perguntas frequentes (FAQ) tem respostas rápidas para as dúvidas mais comuns."
+function words($, el, text) {
+	const span = $(el).find("span[style*='opacity:0.001']").first()
+	if (!span.length) return setText($, el, text)
+	const st = span.attr("style")
+	$(el).html(text.split(/\s+/).map((w) => `<span style="${st}">${w}</span>`).join(" "))
+}
+// FAQ do modelo (páginas de projeto) ainda em inglês
+function faqTexts($) {
+	$("h2, h3").each((_, el) => {
+		const t = $(el).text().replace(/\s+/g, " ").trim()
+		if (t === "Frequently") words($, el, "Perguntas")
+		else if (t === "Asked Questions") words($, el, "Frequentes")
+	})
+	$("p").filter((_, el) => /^Have questions\? Our FAQ section/.test($(el).text().trim())).each((_, el) => $(el).html(FAQ_TEXT))
+}
+// frase solta do template que sobrou em algumas versões de celular
+function leftoverEnglish($) {
+	$("p").filter((_, el) => /^Effortlessly connect with your favorite tools/.test($(el).text().replace(/\s+/g, " ").trim())).each((_, el) => {
+		const inFaq = $(el).closest("section, [data-framer-name=FAQ]").find(".framer-g8i14").length
+		$(el).html(inFaq ? FAQ_TEXT : "Estratégia, criatividade e tecnologia trabalhando juntas pelo crescimento da sua marca.")
+	})
+}
+
 export function patchCommon(ctx) {
 	const { $ } = ctx
 	replaceTexts($)
+	faqTexts($)
 	fixResponsiveEnglish(ctx)
+	leftoverEnglish($)
 	fixLinks($, ctx.path)
 	fixHead($, ctx.path)
 	whatsappForms($)
