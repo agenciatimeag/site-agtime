@@ -5,6 +5,7 @@ import path from "node:path"
 import { hiddenClasses, fillFromHydrated, load, mqMatches } from "./lib/fill.mjs"
 import { rewriteAssetUrls, stripFramerRuntime } from "./lib/html.mjs"
 import { patchCommon, patchPage } from "./patches.mjs"
+import "./pages.mjs"
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const OUT = path.join(ROOT, "public")
@@ -14,11 +15,11 @@ const read = (p) => fs.readFileSync(path.join(ROOT, p), "utf8")
 const exists = (p) => fs.existsSync(path.join(ROOT, p))
 
 export const PAGES = [
-	{ id: "home", out: "index.html" },
-	{ id: "sobre", out: "sobre/index.html" },
-	{ id: "portfolio", out: "portfolio/index.html" },
-	{ id: "contato", out: "contato/index.html" },
-	{ id: "404", out: "404.html" },
+	{ id: "home", out: "index.html", path: "/" },
+	{ id: "sobre", out: "sobre/index.html", path: "/sobre" },
+	{ id: "portfolio", out: "portfolio/index.html", path: "/portfolio" },
+	{ id: "contato", out: "contato/index.html", path: "/contato" },
+	{ id: "404", out: "404.html", path: "/404" },
 ]
 
 function fxFor($) {
@@ -41,7 +42,7 @@ function fxFor($) {
 	return { el, comps, cursors }
 }
 
-export function buildPage(id, mutate) {
+export function buildPage(id, mutate, pagePath) {
 	const raw = read(`capture/raw/${id}.html`)
 	const hidden = hiddenClasses(raw)
 	const $ = load(raw)
@@ -51,7 +52,7 @@ export function buildPage(id, mutate) {
 		if (!exists(f)) continue
 		stats.fills += fillFromHydrated($, load(read(f)), w, hidden)
 	}
-	const ctx = { $, hidden, id, visibleAt: (el, w) => !$(el).parents().addBack().toArray().some((n) => ($(n).attr("class") || "").split(/\s+/).some((c) => hidden[c] && mqMatches(hidden[c], w))) }
+	const ctx = { $, hidden, id, path: pagePath || "/", visibleAt: (el, w) => !$(el).parents().addBack().toArray().some((n) => ($(n).attr("class") || "").split(/\s+/).some((c) => hidden[c] && mqMatches(hidden[c], w))) }
 	patchCommon(ctx)
 	patchPage(ctx)
 	if (mutate) mutate(ctx)
@@ -60,6 +61,8 @@ export function buildPage(id, mutate) {
 	$("head").append(`\n<link rel="stylesheet" href="/_site/site.css">\n<script type="application/json" id="fx-data">${JSON.stringify(fx).replace(/</g, "\\u003c")}</script>\n<script src="/_site/site.js" defer></script>\n`)
 	const missing = new Set()
 	let html = rewriteAssetUrls($.html(), missing)
+	// og:image precisa de URL absoluta
+	html = html.replace(/(<meta [^>]*content=")(\/_assets\/[^"]+)("[^>]*data-abs-asset="1")/g, "$1https://www.agtime.com.br$2$3").replace(/ data-abs-asset="1"/g, "")
 	html = html.replace(/<!--\$-->|<!--\/\$-->/g, "")
 	return { html, missing, stats }
 }
@@ -77,7 +80,7 @@ if (process.argv[1] && process.argv[1].endsWith("build.mjs")) {
 	const allMissing = new Set()
 	for (const p of PAGES) {
 		if (!exists(`capture/raw/${p.id}.html`)) { console.log("skip", p.id); continue }
-		const { html, missing, stats } = buildPage(p.id)
+		const { html, missing, stats } = buildPage(p.id, null, p.path)
 		missing.forEach((m) => allMissing.add(m))
 		write(p.out, html)
 		console.log(p.id, "->", p.out, Math.round(html.length / 1024) + "KB", "fills", stats.fills)

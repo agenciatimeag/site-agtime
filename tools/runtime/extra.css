@@ -1,0 +1,42 @@
+/* Seções novas do portfólio (abas, Mais projetos, Artes, Vídeos) e galeria das páginas de projeto.
+   Medidas e cores iguais às do editor do Framer. */
+.tm-tabs{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;width:100%;max-width:1200px;position:relative;z-index:2}
+.tm-tabs a{display:inline-flex;padding:10px 20px;border-radius:999px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);font:500 15px/1.4em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3);text-decoration:none;transition:background-color .2s cubic-bezier(.44,0,.56,1)}
+.tm-tabs a:hover{background:rgba(255,255,255,.12)}
+.tm-anchor{scroll-margin-top:110px}
+.tm-head{display:flex;flex-direction:column;gap:8px;width:100%}
+.tm-h3{margin:0;font:500 34px/36px "DM Sans","DM Sans Placeholder",sans-serif;letter-spacing:-1px;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3)}
+.tm-h4{margin:0;font:500 18px/26px "DM Sans","DM Sans Placeholder",sans-serif;letter-spacing:-.5px;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3)}
+.tm-p{margin:0;font:400 16px/26px "DM Sans","DM Sans Placeholder",sans-serif;letter-spacing:-.2px;color:var(--token-8f8054d9-8a09-4e7e-b957-8a76557c5e75,rgba(255,255,255,.6))}
+.tm-section{display:flex;flex-direction:column;gap:28px;width:100%;max-width:1200px;position:relative;z-index:2}
+.tm-more{gap:20px;padding-top:40px}
+.tm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;width:100%}
+.tm-pcard{display:flex;flex-direction:column;gap:14px;padding:10px 10px 16px;border-radius:22px;border:1px solid var(--token-082d630a-c036-4f77-8c8d-5d7b4650e064,rgba(255,255,255,.08));background:var(--token-73242b55-57d1-4320-8897-28085a430c83,rgba(255,255,255,.02));overflow:hidden;text-decoration:none;transition:transform .4s cubic-bezier(.3,1.15,.5,1),background-color .3s ease}
+.tm-pcard:hover{transform:translateY(-4px);background:rgba(255,255,255,.06)}
+.tm-pcard-img{height:240px;border-radius:14px;overflow:hidden}
+.tm-pcard-img img{display:block;width:100%;height:100%;object-fit:cover}
+.tm-pcard-info{display:flex;flex-direction:column;gap:4px;padding:0 6px}
+.tm-pcard-title{margin:0;font:500 17px/1.3em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3)}
+.tm-meta{margin:0;display:flex;gap:6px;font:400 14px/1.4em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-8f8054d9-8a09-4e7e-b957-8a76557c5e75,rgba(255,255,255,.6))}
+.tm-masonry{columns:3;column-gap:20px;width:100%}
+.tm-art,.tm-video{margin:0 0 20px;break-inside:avoid;display:flex;flex-direction:column;gap:10px}
+.tm-art a{display:block;border-radius:20px;overflow:hidden;border:1px solid var(--token-082d630a-c036-4f77-8c8d-5d7b4650e064,rgba(255,255,255,.08))}
+.tm-art img{display:block;width:100%;height:auto;transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.tm-art a:hover img{transform:scale(1.03)}
+.tm-art figcaption,.tm-video figcaption{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font:400 14px/1.4em "DM Sans","DM Sans Placeholder",sans-serif;color:var(--token-8f8054d9-8a09-4e7e-b957-8a76557c5e75,rgba(255,255,255,.6))}
+.tm-art figcaption b,.tm-video figcaption b{font-weight:500;color:var(--token-59e77027-930e-45f7-94aa-a8ffadf9e382,#faFFF3)}
+.tm-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tm-video-frame{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);background:#111}
+.tm-video-frame img,.tm-video-frame iframe{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0}
+.tm-video-frame button{position:absolute;inset:0;margin:auto;width:68px;height:68px;border:0;border-radius:50%;background:var(--token-f951c3a8-aa43-4825-aa75-915aa92c20d1,#d9ff87);cursor:pointer}
+.tm-video-frame button::after{content:"";position:absolute;left:28px;top:22px;border-style:solid;border-width:12px 0 12px 19px;border-color:transparent transparent transparent #1b2209}
+/* galeria da página de projeto */
+.tm-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start;width:100%;position:relative;z-index:2}
+.tm-gallery-item{display:block;border-radius:24px;overflow:hidden;border:1px solid var(--token-082d630a-c036-4f77-8c8d-5d7b4650e064,rgba(255,255,255,.08))}
+.tm-gallery-item img{display:block;width:100%;height:auto}
+.tm-gallery[data-reveal]{opacity:0;transform:translateY(30px);transition:opacity .8s ease,transform .9s cubic-bezier(.22,1,.36,1)}
+.tm-gallery[data-reveal].is-in{opacity:1;transform:none}
+html:not(.js) .tm-gallery[data-reveal]{opacity:1;transform:none}
+@media (max-width:1199.98px){.tm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.tm-masonry{columns:2}}
+@media (max-width:809.98px){.tm-grid,.tm-grid-2,.tm-gallery{grid-template-columns:1fr}.tm-masonry{columns:1}.tm-h3{font-size:28px;line-height:32px}.tm-pcard-img{height:220px}}
+@media (prefers-reduced-motion:reduce){.tm-pcard,.tm-art img{transition:none}.tm-gallery[data-reveal]{opacity:1;transform:none}}

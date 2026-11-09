@@ -85,15 +85,18 @@ function fixResponsiveEnglish(ctx) {
 	return n
 }
 
-function fixLinks($) {
+function fixLinks($, pagePath = "/") {
 	$("a[href]").each((_, a) => {
 		const $a = $(a), href = $a.attr("href")
 		if (/framer\.com\/\?via|westhill/.test(href)) $a.attr("href", "/contato")
 		else if (/x\.com\/MandroDesign/.test(href)) $a.removeAttr("href")
 		else if (/^https?:\/\/(www\.)?instagram\.com\/?$/.test(href)) $a.attr("href", "https://www.instagram.com/agtime.oficial/")
 		else if (/^https?:\/\/(www\.)?youtube\.com\/?$/.test(href)) $a.attr("href", `https://wa.me/${WHATS}`)
-		else if (/^\.\//.test(href)) $a.attr("href", href.replace(/^\.\//, "/").replace(/^\/$/, "/"))
-		else if (href === ".") $a.attr("href", "/")
+		else if (/^\.{1,2}(\/|$)/.test(href)) {
+			// links relativos do Framer ("./contato", "../") -> caminho absoluto
+			const u = new URL(href, "https://x" + pagePath)
+			$a.attr("href", decodeURI(u.pathname).replace(/(.)\/$/, "$1") + u.hash)
+		}
 	})
 	// rodapé: item "Youtube" (link de afiliado do template) fica escondido
 	$("a").filter((_, a) => $(a).text().trim() === "Youtube").each((_, a) => { $(a).closest("[class*=-container]").css("display", "none") })
@@ -158,11 +161,42 @@ function menuMarks($) {
 	})
 }
 
+const HONEYPOT = ["website", "company", "message", "subject", "title", "description", "feedback", "notes", "details", "remarks", "comments"]
+export function whatsappForms($) {
+	$("form").each((_, f) => {
+		const $f = $(f)
+		$f.find("input").filter((_, i) => HONEYPOT.includes($(i).attr("name")) && !$(i).attr("class")).each((_, i) => {
+			const p = $(i).parent()
+			$(i).remove()
+			if (!p.children().length && !p.text().trim() && !p.is("form")) p.remove()
+		})
+		$f.attr({ "data-whatsapp": WHATS })
+		if ($f.find('input[type="email"]').length && !$f.find("textarea").length) {
+			$f.attr("data-whatsapp-intro", "Olá! Quero receber as notícias de marketing da Agência Time.")
+			$f.find('input[type="email"]').attr({ name: "E-mail", required: "" })
+		}
+	})
+}
+
+
+function fixHead($, pagePath) {
+	const url = "https://www.agtime.com.br" + (pagePath === "/" ? "/" : pagePath)
+	$('link[rel="canonical"]').attr("href", url)
+	$('meta[property="og:url"]').attr("content", url)
+	$('meta[name^="framer-search-index"]').remove()
+	$('meta[property="og:image"], meta[name="twitter:image"]').each((_, m) => {
+		const c = $(m).attr("content") || ""
+		if (/framerusercontent/.test(c)) $(m).attr("data-abs-asset", "1")
+	})
+}
+
 export function patchCommon(ctx) {
 	const { $ } = ctx
 	replaceTexts($)
 	fixResponsiveEnglish(ctx)
-	fixLinks($)
+	fixLinks($, ctx.path)
+	fixHead($, ctx.path)
+	whatsappForms($)
 	revealTextMarks($)
 	tickerMarks($)
 	raysMarks($)

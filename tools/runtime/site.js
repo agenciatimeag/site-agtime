@@ -543,6 +543,17 @@
 
 	/* ---------- 11. formulários → WhatsApp ---------- */
 	function forms() {
+		// estado "vazio" dos campos (o Framer usa para a cor do placeholder)
+		$$(".framer-form-input").forEach(function (i) {
+			var upd = function () { i.classList.toggle("framer-form-input-empty", !i.value) }
+			i.addEventListener("input", upd); i.addEventListener("change", upd); upd()
+		})
+		// vídeos do YouTube só carregam ao clicar
+		$$("[data-yt]").forEach(function (box) {
+			box.addEventListener("click", function () {
+				box.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + box.getAttribute("data-yt") + '?autoplay=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen title="Vídeo"></iframe>'
+			}, { once: true })
+		})
 		$$("form[data-whatsapp]").forEach(function (f) {
 			f.addEventListener("submit", function (ev) {
 				ev.preventDefault()
