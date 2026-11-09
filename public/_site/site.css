@@ -121,3 +121,15 @@ html:not(.js) .tm-gallery[data-reveal]{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.tm-pcard,.tm-art img{transition:none}.tm-gallery[data-reveal]{opacity:1;transform:none}}
 /* celular: subtítulo do topo tinha largura fixa de 500px e saía da tela (defeito do site original) */
 @media (max-width:809.98px){.framer-1yftqk8{width:min(500px,calc(100vw - 40px))!important}}
+/* card "Gestão e transparência total": resumo de entregas (no lugar da onda de áudio do template) */
+.tm-live{display:flex;align-items:center;gap:12px;width:259px;height:72px;padding:0 14px 0 12px;border-radius:16px;background:linear-gradient(180deg,#242424 0%,#1c1b1b 100%);border:1px solid rgba(255,255,255,.08);box-shadow:0 10px 30px rgba(0,0,0,.35);font-family:"DM Sans","DM Sans Placeholder",sans-serif}
+.tm-live-dot{flex:none;display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:#0d0f08;border:2px solid rgba(217,255,135,.35);color:#d9ff87;box-shadow:0 0 18px rgba(217,255,135,.18)}
+.tm-live-info{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}
+.tm-live-row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.tm-live-row b{font-weight:500;font-size:13px;color:#fafff3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tm-live-row em{font-style:normal;font-size:12px;color:#d9ff87}
+.tm-live i{display:block;height:5px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
+.tm-live i span{display:block;height:100%;width:72%;border-radius:5px;background:linear-gradient(90deg,#9fd13a,#d9ff87);transform-origin:left;animation:tm-grow 2.4s cubic-bezier(.22,1,.36,1) both}
+.tm-live small{font-size:11px;color:rgba(255,255,255,.55);white-space:nowrap}
+@keyframes tm-grow{from{transform:scaleX(.15)}to{transform:none}}
+@media (prefers-reduced-motion:reduce){.tm-live i span{animation:none}}

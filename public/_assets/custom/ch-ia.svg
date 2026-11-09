@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none">
+<defs><linearGradient id="g" x1="22" y1="0" x2="22" y2="44" gradientUnits="userSpaceOnUse"><stop stop-color="#cff47c"/><stop offset="1" stop-color="#9abd4a"/></linearGradient>
+<radialGradient id="h" cx="0" cy="0" r="1" gradientTransform="matrix(0 22 -22 0 22 4)" gradientUnits="userSpaceOnUse"><stop stop-color="#fff" stop-opacity=".35"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient></defs>
+<rect width="44" height="44" rx="22" fill="url(#g)"/><rect width="44" height="44" rx="22" fill="url(#h)"/>
+<rect x=".5" y=".5" width="43" height="43" rx="21.5" stroke="#fff" stroke-opacity=".18"/>
+<g transform="translate(12 12) scale(.8333)" fill="#1B2209"><path d="M12 1.5c.5 0 .9.33 1.03.8l1.3 4.6a3.5 3.5 0 0 0 2.4 2.4l4.6 1.3a1.07 1.07 0 0 1 0 2.06l-4.6 1.3a3.5 3.5 0 0 0-2.4 2.4l-1.3 4.6a1.07 1.07 0 0 1-2.06 0l-1.3-4.6a3.5 3.5 0 0 0-2.4-2.4l-4.6-1.3a1.07 1.07 0 0 1 0-2.06l4.6-1.3a3.5 3.5 0 0 0 2.4-2.4l1.3-4.6A1.07 1.07 0 0 1 12 1.5Z"/></g>
+<title>Atendimento com IA</title></svg>

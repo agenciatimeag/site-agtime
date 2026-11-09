@@ -32,6 +32,7 @@ export function stripFramerRuntime($) {
 		const id = s.attr("id") || ""
 		const type = s.attr("type") || ""
 		if (id === "__framer__appearAnimationsContent" || id === "__framer__breakpoints") return // keep, read by our runtime
+		if (type === "application/ld+json" && !/framer/i.test(s.html() || "")) return // dados estruturados do site
 		s.remove()
 	})
 	$('link[rel="modulepreload"], link[rel="preload"][as="script"], link[href*="framerusercontent.com/sites"], link[rel="preconnect"]').remove()

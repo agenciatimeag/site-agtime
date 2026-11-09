@@ -6,6 +6,8 @@ import { hiddenClasses, fillFromHydrated, load, mqMatches } from "./lib/fill.mjs
 import { rewriteAssetUrls, stripFramerRuntime } from "./lib/html.mjs"
 import { patchCommon, patchPage } from "./patches.mjs"
 import "./pages.mjs"
+import { applyFixes } from "./fixes.mjs"
+import { optimizeHtml } from "./lib/optimize.mjs"
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const OUT = path.join(ROOT, "public")
@@ -56,6 +58,7 @@ export function buildPage(id, mutate, pagePath) {
 	patchCommon(ctx)
 	patchPage(ctx)
 	if (mutate) mutate(ctx)
+	applyFixes(ctx)
 	// códigos personalizados do site (ex.: Microsoft Clarity) ficam
 	const snippets = [...raw.matchAll(/<!-- Snippet: \S+ -->([\s\S]*?)<!-- SnippetEnd/g)].map((m) => m[1].trim())
 	stripFramerRuntime($)
@@ -85,10 +88,17 @@ if (process.argv[1] && process.argv[1].endsWith("build.mjs")) {
 		if (!exists(`capture/raw/${p.id}.html`)) { console.log("skip", p.id); continue }
 		const { html, missing, stats } = buildPage(p.id, null, p.path)
 		missing.forEach((m) => allMissing.add(m))
-		write(p.out, html)
+		write(p.out, await optimizeHtml(html))
 		console.log(p.id, "->", p.out, Math.round(html.length / 1024) + "KB", "fills", stats.fills)
 	}
 	const { buildPortfolioDetails } = await import("./portfolio.mjs")
-	for (const r of buildPortfolioDetails(buildPage)) { r.missing.forEach((m) => allMissing.add(m)); write(r.out, r.html) }
+	for (const r of buildPortfolioDetails(buildPage)) { r.missing.forEach((m) => allMissing.add(m)); write(r.out, await optimizeHtml(r.html)) }
+	// robots.txt e sitemap.xml (o Framer gerava sozinho)
+	const SITE = "https://www.agtime.com.br"
+	const { PROJECTS } = await import("./portfolio.mjs")
+	const urls = ["/", "/sobre", "/portfolio", "/contato", ...PROJECTS.map((p) => "/portfolio/" + p.slug)]
+	const today = new Date().toISOString().slice(0, 10)
+	fs.writeFileSync(path.join(OUT, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${SITE}${u}</loc><lastmod>${today}</lastmod></url>`).join("\n")}\n</urlset>\n`)
+	fs.writeFileSync(path.join(OUT, "robots.txt"), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`)
 	if (allMissing.size) console.log("asset URLs not captured:", allMissing.size, [...allMissing].slice(0, 8))
 }

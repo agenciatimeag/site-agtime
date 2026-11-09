@@ -124,10 +124,12 @@ export function portfolioPage(ctx) {
 /* ---------------- /portfolio/<slug> ---------------- */
 function detailPage(ctx, p) {
 	const { $ } = ctx
-	const others = PROJECTS.filter((x) => x.slug !== p.slug).slice(0, 2)
+	// "Outros trabalhos": os dois projetos seguintes da lista (volta ao início no fim)
+	const idx = PROJECTS.findIndex((x) => x.slug === p.slug)
+	const others = [1, 2].map((k) => PROJECTS[(idx + k) % PROJECTS.length])
 	// topo
-	$(".framer-12lke1p p").each((_, el) => setText($, el, p.tagHighlight))
-	$(".framer-1ruvc2z-container .framer-1pw8fxn p").each((_, el) => setText($, el, p.date))
+	$(".framer-12lke1p p").each((_, el) => setText($, el, "ANO"))
+	$(".framer-1ruvc2z-container .framer-1pw8fxn p").each((_, el) => setText($, el, p.year))
 	$(".framer-11mqcdl h1").each((_, el) => setWords($, el, p.innerTitle))
 	$(".framer-1d26g0z p").each((_, el) => setWords($, el, p.description))
 	$(".framer-1pr47zm-container .framer-1pw8fxn p").each((_, el) => setText($, el, p.tags[0]))
@@ -157,6 +159,8 @@ function detailPage(ctx, p) {
 	})
 	$("p").filter((_, el) => /^Have questions\? Our FAQ section/.test($(el).text().trim())).each((_, el) => $(el).html("Tem dúvidas? Nossa seção de perguntas frequentes (FAQ) tem respostas rápidas para as dúvidas mais comuns."))
 	// metadados
+	ctx.ogImage = true
+	$('meta[property="og:image"], meta[name="twitter:image"]').attr({ content: bare(p.img1.url), "data-abs-asset": "1" })
 	$("title").text(`${p.innerTitle} | Agência Time`)
 	$('meta[property="og:title"], meta[name="twitter:title"]').attr("content", `${p.innerTitle} | Agência Time`)
 	$('meta[name="description"], meta[property="og:description"], meta[name="twitter:description"]').attr("content", p.description)
