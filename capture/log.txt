@@ -1,0 +1,45 @@
+raw / 1373368
+raw /sobre 383823
+raw /portfolio 433856
+raw /contato 298127
+raw FAIL /blog Error: HTTP 404
+raw FAIL /404 Error: HTTP 404
+raw /portfolio/million-one 372056
+raw /portfolio/porfólio-1 373326
+raw /portfolio/viper-studio 374432
+assets 322 / 322
+js FAIL https://framerusercontent.com/node_modules/eventemitter3/index.js Error: HTTP 403
+js FAIL https://framerusercontent.com/node_modules/hoist-non-react-statics/node_modules/react-is/cjs/react-is.production.min.js Error: HTTP 403
+js FAIL https://framerusercontent.com/node_modules/hoist-non-react-statics/node_modules/react-is/index.js Error: HTTP 403
+js FAIL https://framerusercontent.com/node_modules/hoist-non-react-statics/dist/hoist-non-react-statics.cjs.js Error: HTTP 403
+js FAIL https://framerusercontent.com/node_modules/fontfaceobserver/fontfaceobserver.standalone.js Error: HTTP 403
+js FAIL https://framerusercontent.com/node_modules/dataloader/index.js Error: HTTP 403
+js modules 44
+shot / 1440
+shot /sobre 1440
+shot /portfolio 1440
+shot /contato 1440
+shot /blog 1440
+shot /404 1440
+shot /portfolio/million-one 1440
+shot /portfolio/porfólio-1 1440
+shot /portfolio/viper-studio 1440
+shot / 810
+shot /sobre 810
+shot /portfolio 810
+shot /contato 810
+shot /blog 810
+shot /404 810
+shot /portfolio/million-one 810
+shot /portfolio/porfólio-1 810
+shot /portfolio/viper-studio 810
+shot / 390
+shot /sobre 390
+shot /portfolio 390
+shot /contato 390
+shot /blog 390
+shot /404 390
+shot /portfolio/million-one 390
+shot /portfolio/porfólio-1 390
+shot /portfolio/viper-studio 390
+done
