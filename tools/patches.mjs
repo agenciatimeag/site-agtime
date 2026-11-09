@@ -219,9 +219,15 @@ function leftoverEnglish($) {
 	})
 }
 
+// palavras soltas (texto animado palavra por palavra) com erro de digitação
+function wordFixes($) {
+	$("span").each((_, sp) => { const t = $(sp).text(); if (t === "Degin") $(sp).text("Design") })
+}
+
 export function patchCommon(ctx) {
 	const { $ } = ctx
 	replaceTexts($)
+	wordFixes($)
 	faqTexts($)
 	fixResponsiveEnglish(ctx)
 	leftoverEnglish($)

@@ -56,7 +56,10 @@ export function buildPage(id, mutate, pagePath) {
 	patchCommon(ctx)
 	patchPage(ctx)
 	if (mutate) mutate(ctx)
+	// códigos personalizados do site (ex.: Microsoft Clarity) ficam
+	const snippets = [...raw.matchAll(/<!-- Snippet: \S+ -->([\s\S]*?)<!-- SnippetEnd/g)].map((m) => m[1].trim())
 	stripFramerRuntime($)
+	if (snippets.length) $("body").append("\n" + snippets.join("\n") + "\n")
 	const fx = fxFor($)
 	$("head").append(`\n<link rel="stylesheet" href="/_site/site.css">\n<script type="application/json" id="fx-data">${JSON.stringify(fx).replace(/</g, "\\u003c")}</script>\n<script src="/_site/site.js" defer></script>\n`)
 	const missing = new Set()
