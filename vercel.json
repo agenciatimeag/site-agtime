@@ -1,21 +1,59 @@
 {
 	"$schema": "https://openapi.vercel.sh/vercel.json",
 	"framework": null,
-	"buildCommand": null,
-	"installCommand": null,
 	"outputDirectory": "public",
 	"cleanUrls": true,
 	"trailingSlash": false,
 	"redirects": [
-		{ "source": "/portfolio/million-one", "destination": "/portfolio/los-neto-dia-das-maes", "permanent": true },
-		{ "source": "/portfolio/porf%C3%B3lio-1", "destination": "/portfolio/mj-engenharia", "permanent": true },
-		{ "source": "/portfolio/porfólio-1", "destination": "/portfolio/mj-engenharia", "permanent": true },
-		{ "source": "/portfolio/viper-studio", "destination": "/portfolio/eleicoes-2024-ze-preto", "permanent": true },
-		{ "source": "/about", "destination": "/sobre", "permanent": true },
-		{ "source": "/contact", "destination": "/contato", "permanent": true }
+		{
+			"source": "/portfolio/million-one",
+			"destination": "/portfolio/los-neto-dia-das-maes",
+			"permanent": true
+		},
+		{
+			"source": "/portfolio/porf%C3%B3lio-1",
+			"destination": "/portfolio/mj-engenharia",
+			"permanent": true
+		},
+		{
+			"source": "/portfolio/porfólio-1",
+			"destination": "/portfolio/mj-engenharia",
+			"permanent": true
+		},
+		{
+			"source": "/portfolio/viper-studio",
+			"destination": "/portfolio/eleicoes-2024-ze-preto",
+			"permanent": true
+		},
+		{
+			"source": "/about",
+			"destination": "/sobre",
+			"permanent": true
+		},
+		{
+			"source": "/contact",
+			"destination": "/contato",
+			"permanent": true
+		}
 	],
 	"headers": [
-		{ "source": "/_assets/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }] },
-		{ "source": "/_site/(.*)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=600, stale-while-revalidate=86400" }] }
+		{
+			"source": "/_assets/(.*)",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "public, max-age=31536000, immutable"
+				}
+			]
+		},
+		{
+			"source": "/_site/(.*)",
+			"headers": [
+				{
+					"key": "Cache-Control",
+					"value": "public, max-age=600, stale-while-revalidate=86400"
+				}
+			]
+		}
 	]
 }
