@@ -54,6 +54,7 @@ function texts($, ctx) {
 	exactText($, "Capabilities", "Sites e IA")
 	exactText($, "Portfolio", "Portfólio")
 	exactText($, "Whatsapp", "WhatsApp")
+	exactText($, "Seu Whatsapp*", "Seu WhatsApp*")
 	exactText($, "ag.time", "Agência Time")
 	exactText($, "ag time", "Agência Time")
 	exactText($, "5/5 satisfação", "Nota 5,0 no Google")
