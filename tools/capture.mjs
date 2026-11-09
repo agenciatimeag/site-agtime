@@ -56,7 +56,9 @@ for (const p of pages) {
 const assetRe = /https:\/\/(?:framerusercontent\.com\/(?:images|assets|third-party-assets)\/[^"'\s)<>\\,]+|fonts\.gstatic\.com\/[^"'\s)<>\\]+)/g
 const urls = new Set(req.extraAssets || [])
 for (const html of Object.values(rawHtml)) for (const m of html.matchAll(assetRe)) urls.add(m[0].replace(/&amp;/g, "&"))
-const manifest = {}
+// mantém os arquivos já capturados em execuções anteriores
+let manifest = {}
+try { manifest = JSON.parse(await fs.readFile(path.join(OUT, "assets.json"), "utf8")) } catch {}
 const list = [...urls]
 await pool(list, 10, async (u) => {
 	try {
@@ -74,6 +76,7 @@ await pool(list, 10, async (u) => {
 })
 await fs.writeFile(path.join(OUT, "assets.json"), JSON.stringify(manifest, null, 1))
 console.log("assets", Object.keys(manifest).length, "/", list.length)
+if (req.assetsOnly) process.exit(0)
 
 // 3) JS modules (to read animation settings later)
 const jsSeen = new Map()

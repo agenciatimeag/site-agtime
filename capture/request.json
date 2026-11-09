@@ -1,15 +1,6 @@
 {
  "base": "https://www.agtime.com.br",
- "pages": [
-  "/",
-  "/sobre",
-  "/portfolio",
-  "/contato",
-  "/404",
-  "/portfolio/million-one",
-  "/portfolio/porfólio-1",
-  "/portfolio/viper-studio"
- ],
+ "pages": [],
  "widths": [
   1440,
   810,
@@ -20,7 +11,38 @@
   810,
   390
  ],
- "extraAssets": [],
+ "extraAssets": [
+  "https://framerusercontent.com/images/PNNdbsVq51EHgItYnZFaXmijM2U.jpg",
+  "https://framerusercontent.com/images/atrgwHdiG99g2WnAm9rT8Z6HVf8.png",
+  "https://framerusercontent.com/images/KlEkOuDnRyptXW00L5ITBpmMh8.png",
+  "https://framerusercontent.com/images/JIyYB7Q5j8rTDofbI9ZCbThY6E.png",
+  "https://framerusercontent.com/images/GjXhBbd9IMeIohIUSc9SGWKLgik.png",
+  "https://framerusercontent.com/images/Xz1K0FLtzQW0wpO6WC6RfyywVw.jpg",
+  "https://framerusercontent.com/images/X2R1CXzojIGiGnI3HGSuleaeGs.jpg",
+  "https://framerusercontent.com/images/ti4Jjq8M3Xt5xFVBJqFVaw6ePk.png",
+  "https://framerusercontent.com/images/5JuX8tHPy5O8uuso5KYck5w70.png",
+  "https://framerusercontent.com/images/M2pOok2KN9kwrEFO8oqwneGF4c.jpg",
+  "https://framerusercontent.com/images/Yek33sNadoYqOAzfSvTZqjFc.jpg",
+  "https://framerusercontent.com/images/JSpnYyRQNq8IphygxWkRq2oooN0.jpg",
+  "https://framerusercontent.com/images/L1Pi1610mBwPOnRb165yMCtXbBA.jpg",
+  "https://framerusercontent.com/images/MoLBU7cMlGinYpUAwHofp6wEybE.png",
+  "https://framerusercontent.com/images/jRMqyiXrfw2SekmorYSDOzjuCI.png",
+  "https://framerusercontent.com/images/EcdOxyMhFiYqnz0bS0fkdQeL4.jpg",
+  "https://framerusercontent.com/images/vF8nECgXwGhkQVKlr1ZtnJVzdc.png",
+  "https://framerusercontent.com/images/XcBoQKi0yU2PQbi1lmeTfJKcdY.png",
+  "https://framerusercontent.com/images/sschgEqdK4WQ8utSBT4SH4ZhvQ.png",
+  "https://framerusercontent.com/images/wTOVwsHRn9HzmTksvN6rByg5XU.jpg",
+  "https://framerusercontent.com/images/3uJOPBcC54dnEYHDvFTMsJx1rgs.jpg",
+  "https://framerusercontent.com/images/r4NMtja5LMOyCTvGKDyShGwCg8.jpg",
+  "https://framerusercontent.com/images/IftkWNzjPbhKmPgeHUv2R9164.jpg",
+  "https://framerusercontent.com/images/yr5jMg7ZGK9PN4qNMcqz7bDUHUg.png",
+  "https://framerusercontent.com/images/ZlyFOFqexpTQmT5xIL8Jmry73E.png",
+  "https://framerusercontent.com/images/1H35HXppJAIVnvibjY0eLDodNVM.png",
+  "https://framerusercontent.com/images/vF0n3xy5XR60svsQoRZsywEmA5Y.png",
+  "https://framerusercontent.com/images/a2Ae7kjzZEm8SWIFOAcgdaU3DyQ.jpg",
+  "https://framerusercontent.com/images/taeJU0kgJCtV150zpKt4fHl5hY.png",
+  "https://framerusercontent.com/images/y4PoEAxH40JZyXwxPcoi0Z8RqPk.png"
+ ],
  "interactions": [
   {
    "name": "faq-1440-0",
@@ -200,6 +222,7 @@
    "capture": "main"
   }
  ],
- "run": 2,
- "allow404": true
+ "run": 3,
+ "allow404": true,
+ "assetsOnly": true
 }
