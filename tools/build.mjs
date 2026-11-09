@@ -8,6 +8,8 @@ import { patchCommon, patchPage } from "./patches.mjs"
 import "./pages.mjs"
 import { applyFixes } from "./fixes.mjs"
 import { optimizeHtml } from "./lib/optimize.mjs"
+import { recolor } from "./lib/recolor.mjs"
+import { fixFonts } from "./lib/fonts.mjs"
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..")
 const OUT = path.join(ROOT, "public")
@@ -70,6 +72,8 @@ export function buildPage(id, mutate, pagePath) {
 	// og:image precisa de URL absoluta
 	html = html.replace(/(<meta [^>]*content=")(\/_assets\/[^"]+)("[^>]*data-abs-asset="1")/g, "$1https://www.agtime.com.br$2$3").replace(/ data-abs-asset="1"/g, "")
 	html = html.replace(/<!--\$-->|<!--\/\$-->/g, "")
+	html = recolor(html) // paleta oficial da marca
+	html = fixFonts(html) // DM Sans íntegra (a captura tinha arquivos sobrescritos)
 	return { html, missing, stats }
 }
 
@@ -82,7 +86,7 @@ function write(rel, html) {
 if (process.argv[1] && process.argv[1].endsWith("build.mjs")) {
 	fs.mkdirSync(path.join(OUT, "_site"), { recursive: true })
 	fs.writeFileSync(path.join(OUT, "_site/site.js"), read("tools/runtime/site.js").replace('/*RAYS_FRAG*/ ""', JSON.stringify(read("tools/runtime/lightrays.frag"))))
-	fs.writeFileSync(path.join(OUT, "_site/site.css"), read("tools/runtime/site.css") + "\n" + read("tools/snippets/portal.css") + (exists("tools/runtime/extra.css") ? "\n" + read("tools/runtime/extra.css") : ""))
+	fs.writeFileSync(path.join(OUT, "_site/site.css"), recolor(read("tools/runtime/site.css") + "\n" + read("tools/snippets/portal.css") + (exists("tools/runtime/extra.css") ? "\n" + read("tools/runtime/extra.css") : "")) + "\n" + read("tools/runtime/framer-forms.css") + "\n" + read("tools/runtime/brand.css"))
 	const allMissing = new Set()
 	for (const p of PAGES) {
 		if (!exists(`capture/raw/${p.id}.html`)) { console.log("skip", p.id); continue }

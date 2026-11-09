@@ -138,7 +138,9 @@ function raysMarks($) {
 			if (!host.length) return
 			host.empty() // remove o <canvas> do three.js copiado da captura
 			const { animation, intensity, position, rays, reach, raysColor } = props
-			host.attr("data-rays", JSON.stringify({ animation, intensity, position, rays, reach, raysColor }))
+			// luz marfim com sálvia (paleta da marca), mais suave que o verde-limão do template
+			const soft = { mode: "multi", color1: "#FDFFF8", color2: "#BAC18D" }
+			host.attr("data-rays", JSON.stringify({ animation, intensity: Math.round((intensity == null ? 50 : intensity) * 0.8), position, rays, reach, raysColor: soft }))
 		})
 	}
 }

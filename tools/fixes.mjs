@@ -100,6 +100,10 @@ const CHANNEL_ICONS = [
 	["i3lRpYZPF6l5tginmGCGm4k6Fo", "ch-ia", "Atendimento com IA do Lemify"],
 ]
 function images($, ctx) {
+	// logo oficial (arquivo vetorial da marca) no menu e no rodapé
+	$("img").filter((_, i) => ($(i).attr("src") || "").includes("vwn10rFvhHcBPIYlo4muLiaACo")).each((_, i) => {
+		$(i).attr({ src: "/_assets/custom/logo-time.svg", alt: "Agência Time" }).removeAttr("srcset").removeAttr("sizes")
+	})
 	// Lemify: canais de atendimento no lugar dos ícones do template (Zoom, Slack, GitHub…)
 	for (const [id, file, alt] of CHANNEL_ICONS) swapImg($, id, `/_assets/custom/${file}.svg`, alt)
 	// foto do farol de carro (template) no carrossel do topo
